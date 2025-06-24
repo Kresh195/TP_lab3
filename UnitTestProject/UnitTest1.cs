@@ -51,5 +51,212 @@ namespace UnitTestProject
             // assert для проверки ожидаемого и полученного значения
             Assert.AreEqual(expectedExceptionMessage, exception.Message);
         }
+
+        /// <summary>
+        /// Пустой первый пароль.
+        /// Пользователь оставил первое поле ввода пароля пустым.
+        /// </summary>
+        [Test]
+        public void T_003_СheckDoctorData_EmptyPassword1()
+        {
+            //подготовка входных данных
+            String login = "myname_doctor";
+            String password = "";
+            String repPassword = "DoctorSuperBest123!";
+            // ожидаемое значение
+            String expectedExceptionMessage = "Первый пароль не может быть пустым.";
+            // assert для получения исключения
+            Exception? exception = Assert.Throws<Exception>(() =>
+            {
+                RegisterForm.checkDoctorData(login, password, repPassword);
+            });
+            Assert.IsNotNull(exception);
+            // assert для проверки ожидаемого и полученного значения
+            Assert.AreEqual(expectedExceptionMessage, exception.Message);
+        }
+
+        /// <summary>
+        /// Пустой второй пароль.
+        /// Пользователь оставил второе поле ввода пароля пустым.
+        /// </summary>
+        [Test]
+        public void T_004_СheckDoctorData_EmptyPassword2()
+        {
+            //подготовка входных данных
+            String login = "myname_doctor";
+            String password = "DoctorSuperBest123!";
+            String repPassword = "";
+            // ожидаемое значение
+            String expectedExceptionMessage = "Второй пароль не может быть пустым.";
+            // assert для получения исключения
+            Exception? exception = Assert.Throws<Exception>(() =>
+            {
+                RegisterForm.checkDoctorData(login, password, repPassword);
+            });
+            Assert.IsNotNull(exception);
+            // assert для проверки ожидаемого и полученного значения
+            Assert.AreEqual(expectedExceptionMessage, exception.Message);
+        }
+
+        /// <summary>
+        /// Пароли отличаются.
+        /// Пользователь ввёл отличающиеся пароли.
+        /// </summary>
+        [Test]
+        public void T_005_СheckDoctorData_DifferentPasswords()
+        {
+            //подготовка входных данных
+            String login = "myname_doctor";
+            String password = "DoctorSuperBest123!";
+            String repPassword = "DoctorBest321!";
+            // ожидаемое значение
+            String expectedExceptionMessage = "Пароли не совпадают";
+            // assert для получения исключения
+            Exception? exception = Assert.Throws<Exception>(() =>
+            {
+                RegisterForm.checkDoctorData(login, password, repPassword);
+            });
+            Assert.IsNotNull(exception);
+            // assert для проверки ожидаемого и полученного значения
+            Assert.AreEqual(expectedExceptionMessage, exception.Message);
+        }
+
+        /// <summary>
+        /// Логин и пароль совпадают.
+        /// Пользователь ввёл одинаковые логин и пароль.
+        /// </summary>
+        [Test]
+        public void T_006_СheckDoctorData_SameLoginPassword()
+        {
+            //подготовка входных данных
+            String login = "myname_doctor";
+            String password = "myname_doctor";
+            String repPassword = "myname_doctor";
+            // ожидаемое значение
+            String expectedExceptionMessage = "Логин и пароль не должны совпадать";
+            // assert для получения исключения
+            Exception? exception = Assert.Throws<Exception>(() =>
+            {
+                RegisterForm.checkDoctorData(login, password, repPassword);
+            });
+            Assert.IsNotNull(exception);
+            // assert для проверки ожидаемого и полученного значения
+            Assert.AreEqual(expectedExceptionMessage, exception.Message);
+        }
+
+        /// <summary>
+        /// Пароль менее 10 символов.
+        /// Пользователь ввёл слишком короткий пароль (меньше 10 симв.).
+        /// </summary>
+        [Test]
+        public void T_007_СheckDoctorData_PasswordLess10Chars()
+        {
+            //подготовка входных данных
+            String login = "myname_doctor";
+            String password = "Doc123!";
+            String repPassword = "Doc123!";
+            // ожидаемое значение
+            String expectedExceptionMessage = "Пароль не может содержать менее 10 символов.";
+            // assert для получения исключения
+            Exception? exception = Assert.Throws<Exception>(() =>
+            {
+                RegisterForm.checkDoctorData(login, password, repPassword);
+            });
+            Assert.IsNotNull(exception);
+            // assert для проверки ожидаемого и полученного значения
+            Assert.AreEqual(expectedExceptionMessage, exception.Message);
+        }
+
+        /// <summary>
+        /// Пароль не содержит цифр.
+        /// Пользователь ввёл пароль, не содержащий цифру.
+        /// </summary>
+        [Test]
+        public void T_008_СheckDoctorData_PasswordNoNumber()
+        {
+            //подготовка входных данных
+            String login = "myname_doctor";
+            String password = "DoctorSuperBest!";
+            String repPassword = "DoctorSuperBest!";
+            // ожидаемое значение
+            String expectedExceptionMessage = "Пароль должен содержать хотя бы одну цифру";
+            // assert для получения исключения
+            Exception? exception = Assert.Throws<Exception>(() =>
+            {
+                RegisterForm.checkDoctorData(login, password, repPassword);
+            });
+            Assert.IsNotNull(exception);
+            // assert для проверки ожидаемого и полученного значения
+            Assert.AreEqual(expectedExceptionMessage, exception.Message);
+        }
+
+        /// <summary>
+        /// Пароль без спецсимвола.
+        /// Пользователь ввёл пароль, не содержащий спецсимвол ("@#$%^&*!").
+        /// </summary>
+        [Test]
+        public void T_009_СheckDoctorData_PasswordNoExtraChar()
+        {
+            //подготовка входных данных
+            String login = "myname_doctor";
+            String password = "DoctorSuperBest123";
+            String repPassword = "DoctorSuperBest123";
+            // ожидаемое значение
+            String expectedExceptionMessage = "Пароль доджен содержать хотя бы один спецсимвол из @#$%^&*!\".";
+            // assert для получения исключения
+            Exception? exception = Assert.Throws<Exception>(() =>
+            {
+                RegisterForm.checkDoctorData(login, password, repPassword);
+            });
+            Assert.IsNotNull(exception);
+            // assert для проверки ожидаемого и полученного значения
+            Assert.AreEqual(expectedExceptionMessage, exception.Message);
+        }
+
+        /// <summary>
+        /// Пароль не содержит букву в верхнем регистре.
+        /// Пользователь ввёл пароль, не содержащий букв в верхнем регистре.
+        /// </summary>
+        [Test]
+        public void T_010_СheckDoctorData_PasswordNoUpperChar()
+        {
+            //подготовка входных данных
+            String login = "myname_doctor";
+            String password = "doctorsuperbest123!";
+            String repPassword = "doctorsuperbest123!";
+            // ожидаемое значение
+            String expectedExceptionMessage = "Пароль должен содержать хотя бы одну букву в верхнем регистре";
+            // assert для получения исключения
+            Exception? exception = Assert.Throws<Exception>(() =>
+            {
+                RegisterForm.checkDoctorData(login, password, repPassword);
+            });
+            Assert.IsNotNull(exception);
+            // assert для проверки ожидаемого и полученного значения
+            Assert.AreEqual(expectedExceptionMessage, exception.Message);
+        }
+
+        /// <summary>
+        /// Запрещённый формат логина.
+        /// Логин содержит запрещенные символы.
+        /// </summary>
+        [Test]
+        public void T_011_СheckDoctorData_LoginForbidden()
+        {
+            //подготовка входных данных
+            String login = "myname_doctor!";
+            String password = "DoctorSuperBest123!";
+            String repPassword = "DoctorSuperBest123!";
+            // ожидаемое значение
+            String expectedExceptionMessage = "Логин должен состоять только из цифр, букв и символа _.";
+            // assert для получения исключения
+            Exception? exception = Assert.Throws<Exception>(() =>
+            {
+                RegisterForm.checkDoctorData(login, password, repPassword);
+            });
+            Assert.IsNotNull(exception);
+            // assert для проверки ожидаемого и полученного значения
+            Assert.AreEqual(expectedExceptionMessage, exception.Message);
+        }
     }
 }
