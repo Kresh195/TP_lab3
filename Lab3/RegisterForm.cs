@@ -37,6 +37,38 @@ namespace Lab3
             {
                 throw new Exception(ExceptionStrings.EmptyPassword2);
             }
+            if (password != repPassword)
+            {
+                throw new Exception(ExceptionStrings.DifferentPasswords);
+            }
+            if (login == password)
+            {
+                throw new Exception(ExceptionStrings.SameLoginPassword);
+            }
+            if (password.Length < 10)
+            {
+                throw new Exception(ExceptionStrings.PasswordLess10Chars);
+            }
+            var regex = new System.Text.RegularExpressions.Regex(@"[0-9]");
+            if (!regex.IsMatch(password))
+            {
+                throw new Exception(ExceptionStrings.PasswordNoNumber);
+            }
+            regex = new System.Text.RegularExpressions.Regex(@"[@#$%^&*!]");
+            if (!regex.IsMatch(password))
+            {
+                throw new Exception(ExceptionStrings.PasswordNoExtraChar);
+            }
+            regex = new System.Text.RegularExpressions.Regex(@"[A-ZÀ-ß]");
+            if (!regex.IsMatch(password))
+            {
+                throw new Exception(ExceptionStrings.PasswordNoUpperChar);
+            }
+            regex = new System.Text.RegularExpressions.Regex(@"^[0-9A-ZÀ-ßa-zà-ÿ_]+$");
+            if (!regex.IsMatch(login))
+            {
+                throw new Exception(ExceptionStrings.LoginForbidden);
+            }
 
             return true;
         }
