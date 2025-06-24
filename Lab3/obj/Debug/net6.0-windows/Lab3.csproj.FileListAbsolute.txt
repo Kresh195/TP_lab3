@@ -1,0 +1,17 @@
+X:\prog\c#\Lab3\bin\Debug\net6.0-windows\Lab3.exe
+X:\prog\c#\Lab3\bin\Debug\net6.0-windows\Lab3.deps.json
+X:\prog\c#\Lab3\bin\Debug\net6.0-windows\Lab3.runtimeconfig.json
+X:\prog\c#\Lab3\bin\Debug\net6.0-windows\Lab3.dll
+X:\prog\c#\Lab3\bin\Debug\net6.0-windows\Lab3.pdb
+X:\prog\c#\Lab3\obj\Debug\net6.0-windows\Lab3.csproj.AssemblyReference.cache
+X:\prog\c#\Lab3\obj\Debug\net6.0-windows\Lab3.RegisterForm.resources
+X:\prog\c#\Lab3\obj\Debug\net6.0-windows\Lab3.csproj.GenerateResource.cache
+X:\prog\c#\Lab3\obj\Debug\net6.0-windows\Lab3.GeneratedMSBuildEditorConfig.editorconfig
+X:\prog\c#\Lab3\obj\Debug\net6.0-windows\Lab3.AssemblyInfoInputs.cache
+X:\prog\c#\Lab3\obj\Debug\net6.0-windows\Lab3.AssemblyInfo.cs
+X:\prog\c#\Lab3\obj\Debug\net6.0-windows\Lab3.csproj.CoreCompileInputs.cache
+X:\prog\c#\Lab3\obj\Debug\net6.0-windows\Lab3.dll
+X:\prog\c#\Lab3\obj\Debug\net6.0-windows\refint\Lab3.dll
+X:\prog\c#\Lab3\obj\Debug\net6.0-windows\Lab3.pdb
+X:\prog\c#\Lab3\obj\Debug\net6.0-windows\Lab3.genruntimeconfig.cache
+X:\prog\c#\Lab3\obj\Debug\net6.0-windows\ref\Lab3.dll
