@@ -41,7 +41,7 @@ namespace UnitTestProject
             String password = "DoctorSuperBest123!";
             String repPassword = "DoctorSuperBest123!";
             // ожидаемое значение
-            String expectedExceptionMessage = "Логин не может быть пустым.";
+            String expectedExceptionMessage = RegisterForm.ExceptionStrings.EmptyLogin;
             // assert для получения исключения
             Exception? exception = Assert.Throws<Exception>(() =>
             {
@@ -64,7 +64,7 @@ namespace UnitTestProject
             String password = "";
             String repPassword = "DoctorSuperBest123!";
             // ожидаемое значение
-            String expectedExceptionMessage = "Первый пароль не может быть пустым.";
+            String expectedExceptionMessage = RegisterForm.ExceptionStrings.EmptyPassword1;
             // assert для получения исключения
             Exception? exception = Assert.Throws<Exception>(() =>
             {
@@ -87,7 +87,7 @@ namespace UnitTestProject
             String password = "DoctorSuperBest123!";
             String repPassword = "";
             // ожидаемое значение
-            String expectedExceptionMessage = "Второй пароль не может быть пустым.";
+            String expectedExceptionMessage = RegisterForm.ExceptionStrings.EmptyPassword2;
             // assert для получения исключения
             Exception? exception = Assert.Throws<Exception>(() =>
             {
@@ -110,7 +110,7 @@ namespace UnitTestProject
             String password = "DoctorSuperBest123!";
             String repPassword = "DoctorBest321!";
             // ожидаемое значение
-            String expectedExceptionMessage = "Пароли не совпадают";
+            String expectedExceptionMessage = RegisterForm.ExceptionStrings.DifferentPasswords;
             // assert для получения исключения
             Exception? exception = Assert.Throws<Exception>(() =>
             {
@@ -133,7 +133,7 @@ namespace UnitTestProject
             String password = "myname_doctor";
             String repPassword = "myname_doctor";
             // ожидаемое значение
-            String expectedExceptionMessage = "Логин и пароль не должны совпадать";
+            String expectedExceptionMessage = RegisterForm.ExceptionStrings.SameLoginPassword;
             // assert для получения исключения
             Exception? exception = Assert.Throws<Exception>(() =>
             {
@@ -156,7 +156,7 @@ namespace UnitTestProject
             String password = "Doc123!";
             String repPassword = "Doc123!";
             // ожидаемое значение
-            String expectedExceptionMessage = "Пароль не может содержать менее 10 символов.";
+            String expectedExceptionMessage = RegisterForm.ExceptionStrings.PasswordLess10Chars;
             // assert для получения исключения
             Exception? exception = Assert.Throws<Exception>(() =>
             {
@@ -179,7 +179,7 @@ namespace UnitTestProject
             String password = "DoctorSuperBest!";
             String repPassword = "DoctorSuperBest!";
             // ожидаемое значение
-            String expectedExceptionMessage = "Пароль должен содержать хотя бы одну цифру";
+            String expectedExceptionMessage = RegisterForm.ExceptionStrings.PasswordNoNumber;
             // assert для получения исключения
             Exception? exception = Assert.Throws<Exception>(() =>
             {
@@ -202,7 +202,7 @@ namespace UnitTestProject
             String password = "DoctorSuperBest123";
             String repPassword = "DoctorSuperBest123";
             // ожидаемое значение
-            String expectedExceptionMessage = "Пароль доджен содержать хотя бы один спецсимвол из @#$%^&*!\".";
+            String expectedExceptionMessage = RegisterForm.ExceptionStrings.PasswordNoExtraChar;
             // assert для получения исключения
             Exception? exception = Assert.Throws<Exception>(() =>
             {
@@ -225,7 +225,7 @@ namespace UnitTestProject
             String password = "doctorsuperbest123!";
             String repPassword = "doctorsuperbest123!";
             // ожидаемое значение
-            String expectedExceptionMessage = "Пароль должен содержать хотя бы одну букву в верхнем регистре";
+            String expectedExceptionMessage = RegisterForm.ExceptionStrings.PasswordNoUpperChar;
             // assert для получения исключения
             Exception? exception = Assert.Throws<Exception>(() =>
             {
@@ -248,7 +248,7 @@ namespace UnitTestProject
             String password = "DoctorSuperBest123!";
             String repPassword = "DoctorSuperBest123!";
             // ожидаемое значение
-            String expectedExceptionMessage = "Логин должен состоять только из цифр, букв и символа _.";
+            String expectedExceptionMessage = RegisterForm.ExceptionStrings.LoginForbidden;
             // assert для получения исключения
             Exception? exception = Assert.Throws<Exception>(() =>
             {
