@@ -16,9 +16,13 @@ namespace Lab3
             public const string SameLoginPassword = "Логин и пароль не должны совпадать";
             public const string PasswordLess10Chars = "Пароль не может содержать менее 10 символов.";
             public const string PasswordNoNumber = "Пароль должен содержать хотя бы одну цифру";
-            public const string PasswordNoExtraChar = "Пароль доджен содержать хотя бы один спецсимвол из @#$%^&*!\".";
+            public const string PasswordNoExtraChar = "Пароль должен содержать хотя бы один спецсимвол из @#$%^&*!\".";
             public const string PasswordNoUpperChar = "Пароль должен содержать хотя бы одну букву в верхнем регистре";
             public const string LoginForbidden = "Логин должен состоять только из цифр, букв и символа _.";
+
+            public const string NoConnectionDB = "Нет доступа к базе данных, проверьте подключение.";
+            public const string LoginAlreadyExists = "Уже существует пользователь с данным логином.";
+
         }
 
         public static bool checkDoctorData(string login,
@@ -72,6 +76,35 @@ namespace Lab3
 
             return true;
         }
+
+        public IDatabaseController controller = null;
+        public IDoctorEntry onRegisterClick(string login,
+                                            string password,
+                                            string repPassword)
+        {
+            if (checkDoctorData(login, password, repPassword))
+            {
+                if (controller.tryConnectDB())
+                {
+                    if (controller.tryCreateAccount(login, password))
+                    {
+                        IDoctorEntry doctor = controller.getNewDoctorEntry();
+                        controller.login(doctor.Login, doctor.Password);
+                        return doctor;
+                    }
+                    else
+                    {
+                        throw new Exception(ExceptionStrings.LoginAlreadyExists);
+                    }
+                }
+                else
+                {
+                    throw new Exception(ExceptionStrings.NoConnectionDB);
+                }
+            }
+            return null;
+        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {

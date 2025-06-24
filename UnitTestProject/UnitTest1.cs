@@ -9,13 +9,21 @@ namespace UnitTestProject
         /// Правильные данные для СheckDoctorData.
         /// в функцию переданы данные логина и паролей, соответствующие требованиям.
         /// </summary>
-        [Test]
-        public void T_001_СheckDoctorData_BaseFlow()
+        [TestCase("DoctorSuperBest123!")]
+        [TestCase("DoctorSuperBest123$")]
+        [TestCase("DoctorSuperBest13@")]
+        [TestCase("DoctorSuperBest13#")]
+        [TestCase("DoctorSuper$Best13")]
+        [TestCase("DoctorSuperbest13%")]
+        [TestCase("DoctorSuperBest13^")]
+        [TestCase("DoctorSuperBes&t13")]
+        [TestCase("Doctorsu*perBest13")]
+        public void T_001_СheckDoctorData_BaseFlow(string value)
         {
             // подготовка входных данных модуля
             String login = "myname_doctor";
-            String password = "DoctorSuperBest123!";
-            String repPassword = "DoctorSuperBest123!";
+            String password = value;
+            String repPassword = value;
             // ожидаемое значение
             bool expectedReturnValue = true;
             //подготовка переменной для возвращаемого значения
@@ -258,5 +266,83 @@ namespace UnitTestProject
             // assert для проверки ожидаемого и полученного значения
             Assert.AreEqual(expectedExceptionMessage, exception.Message);
         }
+
+        /// <summary>
+        /// Регистрация успешна. Процесс регистрации успешный.
+        /// </summary>
+        [Test]
+        public void T_012_onRegisterClick_BasicFlow()
+        {
+            // подготовка входных данных
+            String login = "myname_doctor";
+            String password = "DoctorSuperBest123!";
+            String repPassword = "DoctorSuperBest123!";
+            // подготовка модуля
+            RegisterForm registerForm = new RegisterForm();
+            registerForm.controller = new DummyDatabaseController_OK();
+            IDoctorEntry doctorEntry = null;
+            // Assert для проверки отсутствия выброса исключения
+            Assert.DoesNotThrow(() =>
+            {
+                doctorEntry = registerForm.onRegisterClick(login, password, repPassword);
+            });
+            // Assert для проверки ожидаемого и полученного значения
+            Assert.IsNotNull(doctorEntry);
+            Assert.AreEqual(doctorEntry.Login, login);
+            Assert.AreEqual(doctorEntry.Password, password);
+        }
+
+        /// <summary>
+        /// Невозможно подключится к БД.
+        /// Нет доступа к базе данных, поэтому не можем зарегистрироваться.
+        /// </summary>
+        [Test]
+        public void T_013_onRegisterClick_NoConnectionDB()
+        {
+            //подготовка входных данных
+            String login = "myname_doctor";
+            String password = "DoctorSuperBest123!";
+            String repPassword = "DoctorSuperBest123!";
+            //ожидаемое значение
+            String expectedExceptionMessage = RegisterForm.ExceptionStrings.NoConnectionDB;
+            // подготовка модуля
+            RegisterForm registerForm = new RegisterForm();
+            registerForm.controller = new DummyDatabaseController_NoConnection();
+            // Assert для получения исключения
+            Exception? exception = Assert.Throws<Exception>(() =>
+            {
+                registerForm.onRegisterClick(login, password, repPassword);
+            });
+            Assert.IsNotNull(exception);
+            // Assert для проверки ожидаемого и полученного значения
+            Assert.AreEqual(expectedExceptionMessage, exception.Message);
+        }
+
+        /// <summary>
+        /// Невозможно подключится к БД.
+        /// Нет доступа к базе данных, поэтому не можем зарегистрироваться.
+        /// </summary>
+        [Test]
+        public void T_014_onRegisterClick_LoginAlreadyExists()
+        {
+            //подготовка данных
+            String login = "myname_doctor";
+            String password = "DoctorSuperBest123!";
+            String repPassword = "DoctorSuperBest123!";
+            //ожидаемое значение
+            String expectedExceptionMessage = RegisterForm.ExceptionStrings.LoginAlreadyExists;
+            // подготовка модуля
+            RegisterForm registerForm = new RegisterForm();
+            registerForm.controller = new DummyDatabaseController_LoginExists();
+            // Assert для получения исключения
+            Exception? exception = Assert.Throws<Exception>(() =>
+            {
+                registerForm.onRegisterClick(login, password, repPassword);
+            });
+            Assert.IsNotNull(exception);
+            // Assert для проверки ожидаемого и полученного значения
+            Assert.AreEqual(expectedExceptionMessage, exception.Message);
+        }
+
     }
 }
